@@ -788,8 +788,10 @@ async function createAgentFromTemplate(templateName: string, basePath: string, v
   const agentLoader = new AgentLoader(basePath);
   
   // Resolve template with layer precedence
-  const templateResult = await layerManager.resolveTemplate(templateName);
-  if (!templateResult.exists) {
+  let templateResult;
+  try {
+    templateResult = await layerManager.resolveTemplate(templateName);
+  } catch (error) {
     console.log(chalk.red(`❌ Template not found: ${templateName}`));
     console.log(chalk.dim('💡 Use "lcagents res list templates" to see available templates'));
     return;

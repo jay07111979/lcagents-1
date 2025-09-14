@@ -24,6 +24,11 @@ export interface ResourceFile {
     checksum: string;
     lastModified: string;
 }
+export interface ResourceWithSource {
+    name: string;
+    path: string;
+    source: 'core' | 'org' | 'custom';
+}
 export interface ResourceResolutionResult {
     found: boolean;
     path?: string;

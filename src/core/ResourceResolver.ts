@@ -27,6 +27,17 @@ export class ResourceResolver {
   }
 
   /**
+   * Get metadata for a resource
+   */
+  async getResourceMetadata(resourceType: ResourceType, resourceName: string): Promise<any> {
+    const metadataPath = path.join(this.basePath, '.lcagents', 'metadata', resourceType, `${resourceName}.json`);
+    if (await fs.pathExists(metadataPath)) {
+      return fs.readJson(metadataPath);
+    }
+    return null;
+  }
+
+  /**
    * Resolve a checklist file by name
    */
   async resolveChecklist(checklistName: string): Promise<ResourceResolutionResult> {

@@ -195,7 +195,11 @@ async function main() {
     console.log();
     console.log(colorize('green', '✅ LCAgents completely removed'));
     console.log();
-    console.log(colorize('gray', 'To reinstall: npx git+https://github.com/jmaniLC/lcagents.git init'));
+    const repositoryConfig = require('../../../config/repository.json');
+const repoUrl = repositoryConfig.repository.url;
+
+// ... existing code ...
+console.log(colorize('gray', `To reinstall: npx git+${repoUrl} init`));
     
   } catch (error) {
     console.log();

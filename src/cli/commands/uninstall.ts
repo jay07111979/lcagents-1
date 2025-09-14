@@ -7,6 +7,9 @@ import ora from 'ora';
 import inquirer from 'inquirer';
 import { GitHubCopilotManager } from '../../core/GitHubCopilotManager';
 
+const repositoryConfig = require('../config/repository.json');
+const repoUrl = repositoryConfig.repository.url;
+
 /**
  * Remove shell alias for lcagent command
  */
@@ -86,7 +89,7 @@ export const uninstallCommand = new Command('uninstall')
   .option('--keep-config', 'Keep configuration files')
   .addHelpText('after', `
 Note: To avoid npx install prompts, use the standalone uninstaller:
-curl -fsSL https://raw.githubusercontent.com/jmaniLC/lcagents/main/uninstall.js | node -- --force
+curl -fsSL ${repoUrl.replace('.git', '/raw/main/uninstall.js')} | node -- --force
   `)
   .action(async (options) => {
     const currentDir = process.cwd();
@@ -196,7 +199,7 @@ curl -fsSL https://raw.githubusercontent.com/jmaniLC/lcagents/main/uninstall.js 
       }
       
       console.log();
-      console.log(chalk.dim('To reinstall: npx git+https://github.com/jmaniLC/lcagents.git init'));
+      console.log(chalk.dim(`To reinstall: npx git+${repoUrl} init`));
       
       // Always provide manual unalias instructions
       if (aliasResult.success) {

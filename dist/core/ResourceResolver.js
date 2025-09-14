@@ -54,6 +54,16 @@ class ResourceResolver {
         return this.resolveResource('templates', templateName);
     }
     /**
+     * Get metadata for a resource
+     */
+    async getResourceMetadata(resourceType, resourceName) {
+        const metadataPath = path.join(this.basePath, '.lcagents', 'metadata', resourceType, `${resourceName}.json`);
+        if (await fs.pathExists(metadataPath)) {
+            return fs.readJson(metadataPath);
+        }
+        return null;
+    }
+    /**
      * Resolve a checklist file by name
      */
     async resolveChecklist(checklistName) {

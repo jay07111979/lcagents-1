@@ -13,6 +13,9 @@ import { MetadataGenerator } from '../../core/MetadataGenerator';
 import { InstallationOptions, InstallationResult } from '../../types/CoreSystem';
 import { analyzeTechStack, generateTechStackReport, TechStackData, selectPod } from '../../utils/techStacker';
 
+const repositoryConfig = require('../../../config/repository.json');
+const repoUrl = repositoryConfig.repository.url;
+
 /**
  * Ask user for installation directory
  */
@@ -252,12 +255,12 @@ async function setupShellAlias(): Promise<{ success: boolean; message: string; i
       return {
         success: false,
         message: 'Unsupported shell detected',
-        instructions: 'Manually add: alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"'
+        instructions: `Manually add: alias lcagent="npx git+${repoUrl}"`
       };
     }
 
-    const aliasCommand1 = 'alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"';
-    const aliasCommand2 = 'alias lcagents="npx git+https://github.com/jmaniLC/lcagents.git"';
+    const aliasCommand1 = `alias lcagent="npx git+${repoUrl}"`;
+    const aliasCommand2 = `alias lcagents="npx git+${repoUrl}"`;
     const aliasComment = '# LCAgents aliases for easy access';
     
     // Check if alias already exists
@@ -282,8 +285,8 @@ async function setupShellAlias(): Promise<{ success: boolean; message: string; i
       const activateScript = `#!/bin/bash
 # LCAgents alias activation script
 source ${configFile}
-alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"
-alias lcagents="npx git+https://github.com/jmaniLC/lcagents.git"
+alias lcagent="npx git+${repoUrl}"
+alias lcagents="npx git+${repoUrl}"
 echo "✅ LCAgents aliases activated in current session"
 # Clean up this temporary script
 rm -f "${tempScript}"
@@ -315,7 +318,7 @@ rm -f "${tempScript}"
     return {
       success: false,
       message: 'Failed to setup shell alias',
-      instructions: 'Manually add: alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"'
+      instructions: `Manually add: alias lcagent="npx git+${repoUrl}"`
     };
   }
 }

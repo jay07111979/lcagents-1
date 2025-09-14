@@ -13,6 +13,10 @@ export declare class ResourceResolver {
      */
     resolveTemplate(templateName: string): Promise<ResourceResolutionResult>;
     /**
+     * Get metadata for a resource
+     */
+    getResourceMetadata(resourceType: ResourceType, resourceName: string): Promise<any>;
+    /**
      * Resolve a checklist file by name
      */
     resolveChecklist(checklistName: string): Promise<ResourceResolutionResult>;

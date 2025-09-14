@@ -55,6 +55,8 @@ const RuntimeConfigManager_1 = require("../../core/RuntimeConfigManager");
 const GitHubCopilotManager_1 = require("../../core/GitHubCopilotManager");
 const MetadataGenerator_1 = require("../../core/MetadataGenerator");
 const techStacker_1 = require("../../utils/techStacker");
+const repositoryConfig = require('../../../config/repository.json');
+const repoUrl = repositoryConfig.repository.url;
 /**
  * Ask user for installation directory
  */
@@ -264,11 +266,11 @@ async function setupShellAlias() {
             return {
                 success: false,
                 message: 'Unsupported shell detected',
-                instructions: 'Manually add: alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"'
+                instructions: `Manually add: alias lcagent="npx git+${repoUrl}"`
             };
         }
-        const aliasCommand1 = 'alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"';
-        const aliasCommand2 = 'alias lcagents="npx git+https://github.com/jmaniLC/lcagents.git"';
+        const aliasCommand1 = `alias lcagent="npx git+${repoUrl}"`;
+        const aliasCommand2 = `alias lcagents="npx git+${repoUrl}"`;
         const aliasComment = '# LCAgents aliases for easy access';
         // Check if alias already exists
         if (await fs.pathExists(configFile)) {
@@ -290,8 +292,8 @@ async function setupShellAlias() {
             const activateScript = `#!/bin/bash
 # LCAgents alias activation script
 source ${configFile}
-alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"
-alias lcagents="npx git+https://github.com/jmaniLC/lcagents.git"
+alias lcagent="npx git+${repoUrl}"
+alias lcagents="npx git+${repoUrl}"
 echo "✅ LCAgents aliases activated in current session"
 # Clean up this temporary script
 rm -f "${tempScript}"
@@ -321,7 +323,7 @@ rm -f "${tempScript}"
         return {
             success: false,
             message: 'Failed to setup shell alias',
-            instructions: 'Manually add: alias lcagent="npx git+https://github.com/jmaniLC/lcagents.git"'
+            instructions: `Manually add: alias lcagent="npx git+${repoUrl}"`
         };
     }
 }

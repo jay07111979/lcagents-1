@@ -1,1 +1,1 @@
-{"version":3,"file":"uninstall.d.ts","sourceRoot":"","sources":["../../../src/cli/commands/uninstall.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAkFpC,eAAO,MAAM,gBAAgB,SAoIzB,CAAC"}
+{"version":3,"file":"uninstall.d.ts","sourceRoot":"","sources":["../../../src/cli/commands/uninstall.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAqFpC,eAAO,MAAM,gBAAgB,SAoIzB,CAAC"}
